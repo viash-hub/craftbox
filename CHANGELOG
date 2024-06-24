@@ -1,1 +1,5 @@
 # craftbox x.x.x
+
+## NEW FEATURES
+
+* `csv2fasta`: Convert two columns from a CSV file to FASTA entries (PR #).
