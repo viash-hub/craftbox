@@ -1,6 +1,6 @@
 
 
-# 🛠📦 craftbox
+# 🪡📦 craftbox
 
 [![ViashHub](https://img.shields.io/badge/ViashHub-craftbox-7a4baa.png)](https://web.viash-hub.com/packages/craftbox)
 [![GitHub](https://img.shields.io/badge/GitHub-viash--hub%2Fcraftbox-blue.png)](https://github.com/viash-hub/biobox)
