@@ -3,11 +3,11 @@
 # 🪡📦 craftbox
 
 [![ViashHub](https://img.shields.io/badge/ViashHub-craftbox-7a4baa.png)](https://web.viash-hub.com/packages/craftbox)
-[![GitHub](https://img.shields.io/badge/GitHub-viash--hub%2Fcraftbox-blue.png)](https://github.com/viash-hub/biobox)
+[![GitHub](https://img.shields.io/badge/GitHub-viash--hub%2Fcraftbox-blue.png)](https://github.com/viash-hub/craftbox)
 [![GitHub
-License](https://img.shields.io/github/license/viash-hub/craftbox.png)](https://github.com/viash-hub/biobox/blob/main/LICENSE)
+License](https://img.shields.io/github/license/viash-hub/craftbox.png)](https://github.com/viash-hub/craftbox/blob/main/LICENSE)
 [![GitHub
-Issues](https://img.shields.io/github/issues/viash-hub/craftbox.png)](https://github.com/viash-hub/biobox/issues)
+Issues](https://img.shields.io/github/issues/viash-hub/craftbox.png)](https://github.com/viash-hub/craftbox/issues)
 [![Viash
 version](https://img.shields.io/badge/Viash-v0.9.0--RC6-blue)](https://viash.io)
 
@@ -53,7 +53,7 @@ contribute a component to this repository.
 13. Create a `/var/software_versions.txt` file
 
 See the
-[CONTRIBUTING](https://github.com/viash-hub/biobox/blob/main/CONTRIBUTING.md)
+[CONTRIBUTING](https://github.com/viash-hub/craftbox/blob/main/CONTRIBUTING.md)
 file for more details.
 
 ## Support and Community
@@ -61,12 +61,12 @@ file for more details.
 For support, questions, or to join our community:
 
 - **Issues**: Submit questions or issues via the [GitHub issue
-  tracker](https://github.com/viash-hub/biobox/issues).
+  tracker](https://github.com/viash-hub/craftbox/issues).
 - **Discussions**: Join our discussions via [GitHub
-  Discussions](https://github.com/viash-hub/biobox/discussions).
+  Discussions](https://github.com/viash-hub/craftbox/discussions).
 
 ## License
 
 This repository is licensed under an MIT license. See the
-[LICENSE](https://github.com/viash-hub/biobox/blob/main/LICENSE) file
+[LICENSE](https://github.com/viash-hub/craftbox/blob/main/LICENSE) file
 for details.
