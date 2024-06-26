@@ -28,7 +28,7 @@ OUTPUT_DIR_1="$TMPDIR/output_test_1/"
 mkdir "$OUTPUT_DIR_1"
 
 echo ">>> Extracting '$TARFILE' to '$OUTPUT_DIR_1'".
-./$meta_functionality_name \
+$meta_executable \
    --input "$TARFILE" \
    --output "$OUTPUT_DIR_1"
 
@@ -40,7 +40,7 @@ OUTPUT_DIR_2="$TMPDIR/output_test_2/"
 mkdir "$OUTPUT_DIR_2"
 
 echo ">>> Extracting '$TARFILE' to '$OUTPUT_DIR_2', excluding '$test_file.txt'".
-./$meta_functionality_name \
+$meta_executable \
    --input "$TARFILE" \
    --output "$OUTPUT_DIR_2" \
    --exclude 'test_file.txt'
@@ -59,7 +59,7 @@ OUTPUT_DIR_3="$TMPDIR/output_test_3/"
 mkdir "$OUTPUT_DIR_3"
 
 echo "Extracting '$TARFILE_3' to '$OUTPUT_DIR_3'".
-./$meta_functionality_name \
+$meta_executable \
    --input "$TARFILE_3" \
    --output "$OUTPUT_DIR_3"
 
@@ -78,7 +78,7 @@ trap - ERR
 
 OUTPUT_DIR_4="$TMPDIR/output_test_4/"
 echo "Extracting '$TMPDIR/input_test_4.tar.gz' to '$OUTPUT_DIR_4'".
-./$meta_functionality_name \
+$meta_executable \
    --input "$TMPDIR/input_test_4.tar.gz" \
    --output "$OUTPUT_DIR_4"
 
@@ -96,7 +96,7 @@ OUTPUT_DIR_5="$TMPDIR/output_test_5/"
 mkdir "$OUTPUT_DIR_5"
 
 echo "Extracting '$TARFILE_5' to '$OUTPUT_DIR_5'".
-./$meta_functionality_name \
+$meta_executable \
    --input "$TARFILE_5" \
    --output "$OUTPUT_DIR_5"
 
@@ -115,7 +115,7 @@ OUTPUT_DIR_6="$TMPDIR/output_test_6/"
 mkdir "$OUTPUT_DIR_6"
 
 echo "Extracting '$TARFILE_6' to '$OUTPUT_DIR_6'".
-./$meta_functionality_name \
+$meta_executable \
    --input "$TARFILE_6" \
    --output "$OUTPUT_DIR_6"
 
