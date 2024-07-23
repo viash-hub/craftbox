@@ -67,4 +67,4 @@ $meta_executable \
 [[ $(cmp "output4.txt.gz" "expected_output.txt.gz") ]] \
   && echo "Output file output4.txt.gz is not as expected!" && exit 1
 
-echo ">> Tests done, cleaning up"
+echo ">> Tests done"
