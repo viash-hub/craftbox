@@ -1,6 +1,6 @@
 name: concat_text
 description: |
-  concatenate a number of text files, handle gzipped text files gracefully and
+  Concatenate a number of text files, handle gzipped text files gracefully and
   optionally gzip the output text file.
 
   This component is useful for concatening fastq files from different lanes, for instance.
