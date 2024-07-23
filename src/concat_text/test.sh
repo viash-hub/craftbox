@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eo pipefail
+set -euo pipefail
 
 echo ">> Creating test input files file[1-3].txt"
 INPUT_FILE_1="file1.txt"
@@ -49,7 +49,7 @@ echo ">> Run component on 3 plain input files, zipped output"
 $meta_executable \
   --input "$INPUT_FILE_1;$INPUT_FILE_2;$INPUT_FILE_3" \
   --output "output3.txt.gz" \
-  --zip_output
+  --gzip_output
 
 [[ ! -f "output3.txt.gz" ]] \
   && echo "Output file output3.txt.gz not found!" && exit 1
@@ -60,7 +60,7 @@ echo ">> Run component on 3 zipped input files, zipped output"
 $meta_executable \
   --input "$INPUT_FILE_1.gz;$INPUT_FILE_2.gz;$INPUT_FILE_3.gz" \
   --output "output4.txt.gz" \
-  --zip_output
+  --gzip_output
 
 [[ ! -f "output4.txt.gz" ]] \
   && echo "Output file output4.txt.gz not found!" && exit 1

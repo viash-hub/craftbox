@@ -15,7 +15,7 @@ argument_groups:
         example: input?.txt.gz
   - name: Output arguments
     arguments:
-      - name: "--zip_output"
+      - name: "--gzip_output"
         type: boolean_true
         description: Should the output be zipped?
       - name: --output
