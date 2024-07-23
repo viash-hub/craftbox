@@ -1,0 +1,46 @@
+name: concat_text
+description: |
+  concatenate a number of text files, handle gzipped text files gracefully and
+  optionally gzip the output text file.
+
+  This component is useful for concatening fastq files from different lanes, for instance.
+argument_groups:
+  - name: Input arguments
+    arguments:
+      - name: --input
+        description: A list of (gzipped) text files.
+        type: file
+        multiple: true
+        required: true
+        example: input?.txt.gz
+  - name: Output arguments
+    arguments:
+      - name: "--zip_output"
+        type: boolean_true
+        description: Should the output be zipped?
+      - name: --output
+        description: File to write the output to, optionally gzipped.
+        type: file
+        direction: output
+        example: output.txt
+
+resources:
+  - type: bash_script
+    path: script.sh
+test_resources:
+  - type: bash_script
+    path: test.sh
+
+engines:
+  - type: docker
+    image: alpine:latest
+    setup:
+      - type: apk
+        packages:
+          - bash
+          - procps
+          - file
+
+runners:
+  - type: executable
+  - type: nextflow
