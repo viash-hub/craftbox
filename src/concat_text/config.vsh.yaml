@@ -4,6 +4,16 @@ description: |
   optionally gzip the output text file.
 
   This component is useful for concatening fastq files from different lanes, for instance.
+authors:
+  - __merge__: /src/_authors/toni_verbeiren.yaml
+    roles: [ author, maintainer ]
+  - __merge__: /src/_authors/dries_schaumont.yaml
+    roles: [ reviewer ]
+info:
+  improvements: |
+    This component could be improved in 2 ways:
+      1. Allow for a mix of zipped and plain input files
+      2. Allow to specify a compression algorithm for the output
 argument_groups:
   - name: Input arguments
     arguments:
