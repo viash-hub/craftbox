@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-TMPDIR=$(mktemp -d "$meta_temp_dir/$meta_functionality_name-XXXXXX")
+TMPDIR=$(mktemp -d "$meta_temp_dir/concat_text-XXXXXX")
 function clean_up {
   [[ -d "$TMPDIR" ]] && rm -r "$TMPDIR"
 }
