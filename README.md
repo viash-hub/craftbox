@@ -9,7 +9,7 @@ License](https://img.shields.io/github/license/viash-hub/craftbox.png)](https://
 [![GitHub
 Issues](https://img.shields.io/github/issues/viash-hub/craftbox.png)](https://github.com/viash-hub/craftbox/issues)
 [![Viash
-version](https://img.shields.io/badge/Viash-v0.9.0--RC6-blue)](https://viash.io)
+version](https://img.shields.io/badge/Viash-v0.9.0--RC7-blue)](https://viash.io)
 
 A collection of custom-tailored scripts and applied tools.
 
