@@ -1,4 +1,5 @@
 name: craftbox
+version: v0.1.0
 description: |
   A collection of custom-tailored scripts and applied tools.
 license: MIT
