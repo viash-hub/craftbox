@@ -1,4 +1,4 @@
-# craftbox x.x.x
+# craftbox 0.1.0
 
 ## NEW FEATURES
 
