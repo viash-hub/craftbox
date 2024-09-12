@@ -2,6 +2,8 @@
 
 ## NEW FEATURES
 
+* `concat_text`: Concatenate a number of text files
+
 * `csv2fasta`: Convert two columns from a CSV file to FASTA entries (PR #1).
 
 * `untar`: Unpack a .tar file. When the contents of the .tar file is just a single directory,
@@ -9,4 +11,4 @@
 
 ## MINOR CHANGES
 
-* Bump viash to 0.9.0-RC7 (PR #6).
+* Bump viash to 0.9.0
