@@ -18,6 +18,6 @@ echo ">> Run aws s3 sync"
   --quiet
 
 echo ">> Check whether the right files were copied"
-[ ! -f foo/dataset.h5ad ] && echo csv should have been copied && exit 1
+[ ! -f foo/dataset.h5ad ] && echo test file should have been copied && exit 1
 
 echo ">> Test succeeded!"
