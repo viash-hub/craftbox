@@ -4,6 +4,10 @@
 
 * `sync_resources`: Sync a Viash package's test resources to the local filesystem (PR #7).
 
+## BUG FIXES
+
+* `untar`: Fix usage of a deprecated environment variable (PR #8).
+
 # craftbox 0.1.0
 
 ## NEW FEATURES
