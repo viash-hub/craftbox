@@ -1,0 +1,52 @@
+name: sync_resources
+description: Sync a Viash package's test resources to the local filesystem
+usage: |
+  sync_resources
+  sync_resources --input _viash.yaml --output .
+argument_groups:
+  - name: Inputs
+    arguments:
+      - name: "--input"
+        alternatives: ["-i"]
+        type: file
+        description: "Path to the _viash.yaml project configuration file."
+        default: _viash.yaml
+  - name: Outputs
+    arguments:
+      - name: "--output"
+        alternatives: ["-o"]
+        type: file
+        default: .
+        direction: output
+        description: "Path to the directory where the resources will be synced to."
+  - name: Arguments
+    arguments:
+      - name: "--dryrun"
+        type: boolean_true
+        description: "Does not display the operations performed from the specified command."
+      - name: "--exclude"
+        type: "string"
+        multiple: true
+        description: Exclude all files or objects from the command that matches the specified pattern.
+resources:
+  - type: bash_script
+    path: script.sh
+test_resources:
+  - type: bash_script
+    path: test.sh
+engines:
+  - type: docker
+    image: alpine:3
+    setup:
+      - type: apk
+        packages:
+          - bash
+          - rclone
+          - yq
+      - type: docker
+        run:
+          - rclone config create s3 s3 anonymous=true
+          - rclone config create gs gcs anonymous=true
+runners:
+  - type: executable
+  - type: nextflow
