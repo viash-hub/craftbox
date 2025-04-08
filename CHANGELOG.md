@@ -1,3 +1,9 @@
+# craftbox 0.2.0
+
+## NEW FEATURES
+
+* `sync_resources`: Sync a Viash package's test resources to the local filesystem (PR #7).
+
 # craftbox 0.1.0
 
 ## NEW FEATURES
