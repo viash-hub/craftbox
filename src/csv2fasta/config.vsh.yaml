@@ -1,4 +1,5 @@
 name: csv2fasta
+summary: Convert a CSV file to FASTA entries
 description: |
   Convert two columns from a CSV file to FASTA entries. The CSV file can
   contain an optional header and each row (other than the header) becomes
@@ -6,6 +7,13 @@ description: |
   for the FASTA entries, while the other become the sequences. The sequences
   column must only contain characters that are valid IUPAC notation for 
   nucleotides or a group thereof (wildcard characters).
+
+authors:
+  - __merge__: /src/_authors/dries_schaumont.yaml
+    roles: [ author, maintainer ]
+  - __merge__: /src/_authors/robrecht_cannoodt.yaml
+    roles: [ reviewer ]
+
 argument_groups:
   - name: Inputs
     arguments:

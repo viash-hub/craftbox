@@ -1,8 +1,19 @@
 name: sync_resources
-description: Sync a Viash package's test resources to the local filesystem
+summary: Sync a Viash package's test resources to the local filesystem
+description: |
+  Sync a Viash package's test resources to the local filesystem based on the
+  the `.info.test_resources` field in the `_viash.yaml` file. This is useful for
+  testing and debugging purposes.
 usage: |
   sync_resources
   sync_resources --input _viash.yaml --output .
+
+authors:
+  - __merge__: /src/_authors/robrecht_cannoodt.yaml
+    roles: [ author, maintainer ]
+  - __merge__: /src/_authors/dries_schaumont.yaml
+    roles: [ reviewer ]
+
 argument_groups:
   - name: Inputs
     arguments:
