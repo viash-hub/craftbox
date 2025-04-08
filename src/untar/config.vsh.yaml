@@ -1,7 +1,15 @@
 name: untar
+summary: Unpack a .tar file
 description: |
   Unpack a .tar file. When the contents of the .tar file is just a single directory,
   put the contents of the directory into the output folder instead of that directory.
+
+authors:
+  - __merge__: /src/_authors/dries_schaumont.yaml
+    roles: [ author, maintainer ]
+  - __merge__: /src/_authors/robrecht_cannoodt.yaml
+    roles: [ reviewer ]
+
 argument_groups:
   - name: Input arguments
     arguments:

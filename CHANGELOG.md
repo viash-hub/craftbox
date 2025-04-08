@@ -4,6 +4,12 @@
 
 * `sync_resources`: Sync a Viash package's test resources to the local filesystem (PR #7).
 
+## MINOR CHANGES
+
+* Add documentation to multiple components (PR #9).
+
+* Bump Viash to 0.9.3 (PR #9).
+
 ## BUG FIXES
 
 * `untar`: Fix usage of a deprecated environment variable (PR #8).
