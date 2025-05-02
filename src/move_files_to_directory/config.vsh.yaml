@@ -1,0 +1,35 @@
+name: move_files_to_directory
+summary: Publish one or multiple files to the same directory
+description: This component copies one or multiple files to the same destination directory, creating the output directory if it doesn't exist.
+authors:
+  - __merge__: /src/_authors/dorien_roosen.yaml
+    roles: [ maintainer ]
+arguments:
+  - name: "--input"
+    type: file
+    direction: input
+    required: true
+    multiple: true
+    description: Paths of the files that will be copied into the output directory.
+  - name: "--output"
+    type: file
+    direction: output
+    required: true
+    description: Path to output directory
+resources:
+  - type: bash_script
+    path: script.sh
+test_resources:
+  - type: bash_script
+    path: test.sh
+
+engines:
+- type: docker
+  image: debian:latest
+  setup:
+      - type: apt
+        packages: [procps]
+
+runners:
+- type: executable
+- type: nextflow
