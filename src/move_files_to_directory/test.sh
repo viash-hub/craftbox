@@ -14,9 +14,9 @@ touch "$TMPDIR/another_file.txt"
 ./move_files_to_directory \
   --input "$TMPDIR/test_file.txt" \
   --input "$TMPDIR/another_file.txt" \
-  --output test_output
+  --output "$TMPDIR/test_output"
 
-[[ ! -d "test_output" ]] && echo "It seems no output directory is generated" && exit 1
-[[ ! -f "test_output/test_file.txt" ]] && [[ ! -f test_output/another_file.txt ]] && echo "Output files were not copied to the output directory" && exit 1
+[[ ! -d "$TMPDIR/test_output" ]] && echo "It seems no output directory is generated" && exit 1
+[[ ! -f "$TMPDIR/test_output/test_file.txt" ]] && [[ ! -f test_output/another_file.txt ]] && echo "Output files were not copied to the output directory" && exit 1
 
 echo ">> Test succeeded!"
