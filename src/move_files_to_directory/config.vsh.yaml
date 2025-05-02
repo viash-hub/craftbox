@@ -28,7 +28,7 @@ engines:
   image: debian:latest
   setup:
       - type: apt
-        packages: [bcftools, procps]
+        packages: [procps]
 
 runners:
 - type: executable
