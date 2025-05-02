@@ -4,7 +4,7 @@
 
 * `sync_resources`: Sync a Viash package's test resources to the local filesystem (PR #7).
 
-* `publish`: Publish one or multiple files to an output directory (PR #10).
+* `move_files_to_directory`: Publish one or multiple files to an output directory (PR #10).
 
 ## MINOR CHANGES
 
