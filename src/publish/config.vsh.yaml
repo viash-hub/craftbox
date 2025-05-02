@@ -1,0 +1,32 @@
+name: publish
+namespace: "utils"
+description: Publish one or multiple files to the same directory of choice
+authors:
+  - __merge__: /src/_authors/dorien_roosen.yaml
+    roles: [ maintainer ]
+arguments:
+  - name: "--input"
+    type: file
+    direction: input
+    required: true
+    multiple: true
+    description: Input filename
+  - name: "--output"
+    type: file
+    direction: output
+    required: true
+    description: Path to output directory
+resources:
+  - type: bash_script
+    path: script.sh
+test_resources:
+  - type: bash_script
+    path: test.sh
+
+engines:
+- type: docker
+  image: ubuntu:22.04
+
+runners:
+- type: executable
+- type: nextflow
