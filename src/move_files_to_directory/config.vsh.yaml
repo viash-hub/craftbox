@@ -1,6 +1,6 @@
-name: publish
-namespace: "utils"
-description: Publish one or multiple files to the same directory of choice
+name: move_files_to_directory
+summary: Publish one or multiple files to the same directory
+description: This component copies one or multiple files to the same destination directory, creating the output directory if it doesn't exist.
 authors:
   - __merge__: /src/_authors/dorien_roosen.yaml
     roles: [ maintainer ]
@@ -10,7 +10,7 @@ arguments:
     direction: input
     required: true
     multiple: true
-    description: Input filename
+    description: Paths of the files that will be copied into the output directory.
   - name: "--output"
     type: file
     direction: output
@@ -25,7 +25,10 @@ test_resources:
 
 engines:
 - type: docker
-  image: ubuntu:22.04
+  image: debian:latest
+  setup:
+      - type: apt
+        packages: [bcftools, procps]
 
 runners:
 - type: executable
