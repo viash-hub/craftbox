@@ -2,8 +2,7 @@ name: craftbox
 summary: |
   A collection of custom-tailored scripts and applied utilities built with Viash.
 description: |
-  `craftbox` offers a unique set of specialized scripts and tools, meticulously crafted and packaged using the Viash (https://viash.io) framework.
-  These components are designed for specific, often custom, use cases where tailored solutions are paramount.
+  `craftbox` is a curated collection of custom scripts and utilities designed to tackle context-specific tasks.
 
   Emphasizing the Viash principles, `craftbox` components aim for **reusability**, **reproducibility**, and adherence to **best practices**. Key features generally include:
 

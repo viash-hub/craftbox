@@ -10,9 +10,7 @@
 
 * Add documentation to multiple components (PR #9).
 
-* Bump Viash to 0.9.3 (PR #9).
-
-* Bump Viash to 0.9.4 (PR #11).
+* Bump Viash to 0.9.4 (PR #9, PR #11).
 
 * Update documentation and package metadata (PR #11).
 

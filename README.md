@@ -16,10 +16,8 @@ Viash.
 
 ## Introduction
 
-`craftbox` offers a unique set of specialized scripts and tools,
-meticulously crafted and packaged using the Viash (https://viash.io)
-framework. These components are designed for specific, often custom, use
-cases where tailored solutions are paramount.
+`craftbox` is a curated collection of custom scripts and utilities
+designed to tackle context-specific tasks.
 
 Emphasizing the Viash principles, `craftbox` components aim for
 **reusability**, **reproducibility**, and adherence to **best
@@ -43,7 +41,7 @@ practices**. Key features generally include:
 
 Viash components in craftbox can be run in various ways:
 
-``` mermaid lang="mermaid"
+``` mermaid lang="mermaid
 flowchart TD
     A[craftbox v0.2.0] --> B(Viash Hub Launch)
     A --> C(Viash CLI)
