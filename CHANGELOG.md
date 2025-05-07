@@ -12,6 +12,10 @@
 
 * Bump Viash to 0.9.3 (PR #9).
 
+* Bump Viash to 0.9.4 (PR #11).
+
+* Update documentation and package metadata (PR #11).
+
 ## BUG FIXES
 
 * `untar`: Fix usage of a deprecated environment variable (PR #8).

@@ -1,13 +1,26 @@
 name: craftbox
+summary: |
+  A collection of custom-tailored scripts and applied utilities built with Viash.
 description: |
-  A collection of custom-tailored scripts and applied tools.
+  `craftbox` offers a unique set of specialized scripts and tools, meticulously crafted and packaged using the Viash (https://viash.io) framework.
+  These components are designed for specific, often custom, use cases where tailored solutions are paramount.
+
+  Emphasizing the Viash principles, `craftbox` components aim for **reusability**, **reproducibility**, and adherence to **best practices**. Key features generally include:
+
+  * **Standalone & Nextflow Ready:** Components are built to run directly via the command line or be smoothly integrated into Nextflow workflows.
+  * **Custom Implementations:** Contains scripts and tools developed for particular tasks that may not be found in broader collections.
+  * **High Quality Standards (promoted by Viash):**
+      * Clear documentation for components and their parameters.
+      * Full exposure of underlying script/tool arguments for fine-grained control.
+      * Containerized (Docker) to ensure dependency management and a consistent, reproducible runtime environment.
+      * Unit tested where applicable to ensure components function as expected.
+keywords: [scripts, custom, implementations, utilities]
 license: MIT
-keywords: [scripts, custom, implementations]
 links:
   issue_tracker: https://github.com/viash-hub/craftbox/issues
   repository: https://github.com/viash-hub/craftbox
 
-viash_version: 0.9.3
+viash_version: 0.9.4
 
 config_mods: |
   .requirements.commands := ['ps']
