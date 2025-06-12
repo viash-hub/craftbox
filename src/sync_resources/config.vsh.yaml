@@ -8,11 +8,11 @@ usage: |
   sync_resources
   sync_resources --input _viash.yaml --output .
 
-authors:
-  - __merge__: /src/_authors/robrecht_cannoodt.yaml
-    roles: [ author, maintainer ]
-  - __merge__: /src/_authors/dries_schaumont.yaml
-    roles: [ reviewer ]
+# authors:
+#   - __merge__: /src/_authors/robrecht_cannoodt.yaml
+#     roles: [ author, maintainer ]
+#   - __merge__: /src/_authors/dries_schaumont.yaml
+#     roles: [ reviewer ]
 
 argument_groups:
   - name: Inputs
