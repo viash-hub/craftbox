@@ -32,17 +32,11 @@ IFS=";" read -ra input_files <<< "$par_input"
 
 # Process the files if the array contains any paths
 if [ ${#input_files[@]} -gt 0 ] && [ -n "${input_files[0]}" ]; then
-    
-    # Determine final output path based on compression flag
-    final_output_path="$par_output"
-    if [ "$par_compress_output" = "true" ]; then
-        final_output_path="${par_output}.gz"
-    fi
 
     # Ensure the output file is empty before we start
-    > "$final_output_path"
+    > "$par_output"
 
-    echo "Processing files for -> $final_output_path"
+    echo "Processing files for -> $par_output"
 
     # Create a subshell for the loop to group all cat/zcat output.
     (
@@ -57,13 +51,13 @@ if [ ${#input_files[@]} -gt 0 ] && [ -n "${input_files[0]}" ]; then
         done
     ) | if [ "$par_compress_output" = "true" ]; then
         # If compression is enabled, pipe the entire stream to gzip
-        gzip -c >> "$final_output_path"
+        gzip -c >> "$par_output"
     else
         # Otherwise, just redirect the stream to the plain text file
-        cat >> "$final_output_path"
+        cat >> "$par_output"
     fi
 
-    echo "Finished creating $final_output_path."
+    echo "Finished creating $par_output."
 else
     echo "No input files provided in \$par_input. Exiting."
 fi

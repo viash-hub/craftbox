@@ -27,14 +27,14 @@ argument_groups:
         type: file
         multiple: true
         required: true
-        example: input?.txt.gz
+        example: input.txt.gz
   - name: Output arguments
     arguments:
       - name: "--gzip_output"
         type: boolean_true
         description: Should the output be zipped?
       - name: --output
-        description: File to write the output to, optionally gzipped.
+        description: File to write the output to, potentially gzipped.
         type: file
         direction: output
         example: output.txt
