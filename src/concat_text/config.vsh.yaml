@@ -11,6 +11,8 @@ authors:
     roles: [ author, maintainer ]
   - __merge__: /src/_authors/dries_schaumont.yaml
     roles: [ reviewer ]
+  - __merge__: /src/_authors/robrecht_cannoodt.yaml
+    roles: [ contributor ]
 
 info:
   improvements: |
