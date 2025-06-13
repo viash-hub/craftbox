@@ -1,5 +1,5 @@
 name: concat_text
-summary: Concatenate a number of text files
+summary: Concatenate multiple (possibly gzipped) text files
 description: |
   Concatenate a number of text files, handle gzipped text files gracefully and
   optionally gzip the output text file.
@@ -16,9 +16,8 @@ authors:
 
 info:
   improvements: |
-    This component could be improved in 2 ways:
-      1. Allow for a mix of zipped and plain input files
-      2. Allow to specify a compression algorithm for the output
+    This component could be improved:
+      1. Allow to specify a compression algorithm for the output
 
 argument_groups:
   - name: Input arguments
