@@ -2,6 +2,65 @@
 
 set -euo pipefail
 
+echo ">> Running concat_text.sh script"
+
+is_gzipped() {
+    # Ensure the file exists and is not empty
+    if [ ! -s "$1" ]; then
+        return 1
+    fi
+    # Get the MIME type of the file
+    local mime_type
+    mime_type=$(file -b --mime-type "$1")
+    
+    # Check if the MIME type corresponds to gzip.
+    if [[ "$mime_type" == "application/gzip" || "$mime_type" == "application/x-gzip" ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+compare_files() {
+  local file1="$1"
+  local file2="$2"
+  if [[ ! -f "$file1" || ! -f "$file2" ]]; then
+    echo "One of the files does not exist: $file1 or $file2"
+    return 1
+  fi
+  # decompress file 1 if need be
+  if is_gzipped "$file1"; then
+    file1=$(mktemp)
+    zcat "$1" > "$file1"
+  fi
+  # decompress file 2 if need be
+  if is_gzipped "$file2"; then
+    file2=$(mktemp)
+    zcat "$2" > "$file2"
+  fi
+
+  if cmp -s "$file1" "$file2"; then
+    echo "Files are identical."
+    return 0
+  else
+    echo "Files differ."
+    echo "Found:"
+    if is_gzipped "$file1"; then
+      zcat "$file1" | od -c
+    else
+      cat "$file1" | od -c
+    fi
+    echo "Expected:"
+    if is_gzipped "$file2"; then
+      zcat "$file2" | od -c
+    else
+      cat "$file2" | od -c
+    fi
+    return 1
+  fi
+}
+
+## TEST RESOURCES
 echo ">> Creating test input files file[1-3].txt"
 INPUT_FILE_1="file1.txt"
 INPUT_FILE_2="file2.txt"
@@ -25,46 +84,31 @@ EOF
 
 gzip -k "expected_output.txt"
 
+## RUN TESTS
 echo ">> Run component on 3 plain input files, plain output"
 $meta_executable \
   --input "$INPUT_FILE_1;$INPUT_FILE_2;$INPUT_FILE_3" \
   --output "output1.txt"
+compare_files "output1.txt" "expected_output.txt"
 
-[[ ! -f "output1.txt" ]] \
-  && echo "Output file output1.txt not found!" && exit 1
-[[ $(cmp "output1.txt" "expected_output.txt") ]] \
-  && echo "Output file output1.txt is not as expected!" && exit 1
-
-echo ">> Run component on 3 zipped input files, plain output"
+echo ">> Run component on mixed input files, plain output"
 $meta_executable \
-  --input "$INPUT_FILE_1.gz;$INPUT_FILE_2.gz;$INPUT_FILE_3.gz" \
+  --input "$INPUT_FILE_1.gz;$INPUT_FILE_2;$INPUT_FILE_3.gz" \
   --output "output2.txt"
-
-[[ ! -f "output2.txt" ]] \
-  && echo "Output file output2.txt not found!" && exit 1
-[[ $(cmp "output2.txt" "expected_output.txt") ]] \
-  && echo "Output file output2.txt is not as expected!" && exit 1
+compare_files "output2.txt" "expected_output.txt"
 
 echo ">> Run component on 3 plain input files, zipped output"
 $meta_executable \
   --input "$INPUT_FILE_1;$INPUT_FILE_2;$INPUT_FILE_3" \
   --output "output3.txt.gz" \
   --gzip_output
+compare_files "output3.txt.gz" "expected_output.txt.gz"
 
-[[ ! -f "output3.txt.gz" ]] \
-  && echo "Output file output3.txt.gz not found!" && exit 1
-[[ $(cmp "output3.txt.gz" "expected_output.txt.gz") ]] \
-  && echo "Output file output3.txt.gz is not as expected!" && exit 1
-
-echo ">> Run component on 3 zipped input files, zipped output"
+echo ">> Run component on mixed input files, zipped output"
 $meta_executable \
-  --input "$INPUT_FILE_1.gz;$INPUT_FILE_2.gz;$INPUT_FILE_3.gz" \
+  --input "$INPUT_FILE_1.gz;$INPUT_FILE_2;$INPUT_FILE_3.gz" \
   --output "output4.txt.gz" \
   --gzip_output
-
-[[ ! -f "output4.txt.gz" ]] \
-  && echo "Output file output4.txt.gz not found!" && exit 1
-[[ $(cmp "output4.txt.gz" "expected_output.txt.gz") ]] \
-  && echo "Output file output4.txt.gz is not as expected!" && exit 1
+compare_files "output4.txt.gz" "expected_output.txt.gz"
 
 echo ">> Tests done"
