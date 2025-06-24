@@ -12,12 +12,19 @@ if [[ ! -d "$par_output" ]]; then
   mkdir -p "$par_output"
 fi
 
+extra_params=( )
+
+if [ "$par_keep_symbolic_links" == "true" ]; then
+  extra_params+=( "-d" )
+fi
+
 # Process multiple input files
 IFS=";" read -ra input_files <<< "$par_input"
 for file in "${input_files[@]}"; do
   # Check if the file exists before copying
   if [[ -f "$file" ]]; then
-    cp "$file" "$par_output/"
+
+    cp ${extra_params[@]} "$file" "$par_output/"
     echo "Copied $file to $par_output/"
   else
     echo "Warning: Input file $file does not exist, skipping"
