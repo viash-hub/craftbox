@@ -1,3 +1,9 @@
+# craftbox 0.3.0
+
+## NEW FEATURES
+
+* `move_files_to_directory`: add support for preserving symbolic links (PR #13).
+
 # craftbox 0.2.0
 
 ## NEW FEATURES
