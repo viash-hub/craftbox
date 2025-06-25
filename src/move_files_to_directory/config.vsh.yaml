@@ -16,6 +16,10 @@ arguments:
     direction: output
     required: true
     description: Path to output directory
+  - name: "--keep_symbolic_links"
+    alternatives: [-d]
+    type: boolean_true
+    description: Preserve symbolic links.
 resources:
   - type: bash_script
     path: script.sh
