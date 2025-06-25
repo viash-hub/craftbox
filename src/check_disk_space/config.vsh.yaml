@@ -1,6 +1,6 @@
-name: check_resources
+name: check_disk_space
 description: |
-  Check for available resources on the system.
+  Check for available disk space on the system.
 
   This component is only useful when working with persistent storage environments
   where all workflow steps execute on the same instance or share the same
