@@ -12,6 +12,9 @@
 
 * `move_files_to_directory`: Publish one or multiple files to an output directory (PR #10).
 
+* `check_disk_space`: Add functionality to check available system resources (PR #14).
+
+
 ## MINOR CHANGES
 
 * Add documentation to multiple components (PR #9).
