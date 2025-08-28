@@ -7,7 +7,7 @@ license <- paste0(package$links$repository, "/blob/main/LICENSE")
 contributing <- paste0(package$links$repository, "/blob/main/CONTRIBUTING.md")
 
 pkg <- package$name
-ver <- if (!is.null(package$version)) package$version else "v0.2.0"
+ver <- if (!is.null(package$version)) package$version else "v0.3.0"
 comp <- "concat_rtext"
 ```
 # 🪡📦 `r pkg`
