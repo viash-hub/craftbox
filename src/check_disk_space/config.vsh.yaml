@@ -1,0 +1,56 @@
+name: check_disk_space
+description: |
+  Check for available disk space on the system.
+
+  This component is only useful when working with persistent storage environments
+  where all workflow steps execute on the same instance or share the same
+  storage volume. That is, running thus component on e.g. AWS Batch or
+  other cloud-based systems will not work as expected, since each step
+  can run on a different instance and resources will not be shared.
+  
+  For distributed environments, consider integrating resource checks directly
+  into the components that will actually consume the storage, rather than
+  using this standalone check.
+
+argument_groups:
+  - name: Inputs
+    arguments:
+      - name: --tmp_space_required
+        type: integer
+        description: Temporary space required in MB.
+        required: false
+        default: 1000
+      - name: --publish_space_required
+        type: integer
+        description: Publish space required in MB.
+        required: false
+        default: 500
+      - name: --publish_dir
+        type: file
+        description: Directory where workflow outputs will be published.
+        required: false
+
+  - name: Outputs
+    arguments:
+      - name: --output
+        type: file
+        direction: output
+        description: Output file containing system resources details.
+        required: false
+        default: output.txt
+
+resources:
+  - type: bash_script
+    path: script.sh
+
+test_resources:
+  - type: bash_script
+    path: test.sh
+
+engines:
+  - type: docker
+    image: bash:latest
+
+runners:
+  - type: executable
+  - type: nextflow

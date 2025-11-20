@@ -19,4 +19,13 @@ touch "$TMPDIR/another_file.txt"
 [[ ! -d "$TMPDIR/test_output" ]] && echo "It seems no output directory is generated" && exit 1
 [[ ! -f "$TMPDIR/test_output/test_file.txt" ]] && [[ ! -f test_output/another_file.txt ]] && echo "Output files were not copied to the output directory" && exit 1
 
+ln -s "$TMPDIR/test_file.txt" "$TMPDIR/symlink.txt"
+
+./move_files_to_directory \
+  --input "$TMPDIR/symlink.txt" \
+  --output "$TMPDIR/test_output_symlink" \
+  --keep_symbolic_links
+[[ ! -d "$TMPDIR/test_output_symlink" ]] && echo "It seems no output directory (test_output_symlink) is generated" && exit 1
+[[ ! -h "$TMPDIR/test_output_symlink/symlink.txt" ]] && echo "Symbolic links were not properly copied." && exit 1
+
 echo ">> Test succeeded!"

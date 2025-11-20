@@ -1,9 +1,16 @@
-# craftbox (unreleased)
+# craftbox 0.3.1
 
 ## MINOR CHANGES
 
 * `concat_text`: Allow input files to be a mixed bag of gzipped and plain text files (PR #12).
+
 * `concat_text`: Stream concatenated files to gzip (PR #12).
+
+# craftbox 0.3.0
+
+## NEW FEATURES
+
+* `move_files_to_directory`: add support for preserving symbolic links (PR #13).
 
 # craftbox 0.2.0
 
@@ -12,6 +19,9 @@
 * `sync_resources`: Sync a Viash package's test resources to the local filesystem (PR #7).
 
 * `move_files_to_directory`: Publish one or multiple files to an output directory (PR #10).
+
+* `check_disk_space`: Add functionality to check available system resources (PR #14).
+
 
 ## MINOR CHANGES
 
