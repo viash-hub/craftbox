@@ -1,3 +1,11 @@
+# craftbox 0.3.1
+
+## MINOR CHANGES
+
+* `concat_text`: Allow input files to be a mixed bag of gzipped and plain text files (PR #12).
+
+* `concat_text`: Stream concatenated files to gzip (PR #12).
+
 # craftbox 0.3.0
 
 ## NEW FEATURES
