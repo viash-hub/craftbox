@@ -1,5 +1,5 @@
 name: concat_text
-summary: Concatenate a number of text files
+summary: Concatenate multiple (possibly gzipped) text files
 description: |
   Concatenate a number of text files, handle gzipped text files gracefully and
   optionally gzip the output text file.
@@ -11,12 +11,13 @@ authors:
     roles: [ author, maintainer ]
   - __merge__: /src/_authors/dries_schaumont.yaml
     roles: [ reviewer ]
+  - __merge__: /src/_authors/robrecht_cannoodt.yaml
+    roles: [ contributor ]
 
 info:
   improvements: |
-    This component could be improved in 2 ways:
-      1. Allow for a mix of zipped and plain input files
-      2. Allow to specify a compression algorithm for the output
+    This component could be improved:
+      1. Allow to specify a compression algorithm for the output
 
 argument_groups:
   - name: Input arguments
@@ -26,14 +27,14 @@ argument_groups:
         type: file
         multiple: true
         required: true
-        example: input?.txt.gz
+        example: input.txt.gz
   - name: Output arguments
     arguments:
       - name: "--gzip_output"
         type: boolean_true
         description: Should the output be zipped?
       - name: --output
-        description: File to write the output to, optionally gzipped.
+        description: File to write the output to, potentially gzipped.
         type: file
         direction: output
         example: output.txt

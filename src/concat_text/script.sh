@@ -1,34 +1,65 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -eo pipefail
 
-TMPDIR=$(mktemp -d "$meta_temp_dir/concat_text-XXXXXX")
-function clean_up {
-  [[ -d "$TMPDIR" ]] && rm -r "$TMPDIR"
+## VIASH START
+par_input="README.md;README.qmd"
+par_output="concatenated_output.txt"
+par_compress_output="true"
+## VIASH END
+
+# --- Function to check for GZIP format using the 'file' command ---
+is_gzipped() {
+    # Ensure the file exists and is not empty before checking
+    if [ ! -s "$1" ]; then
+        return 1
+    fi
+    # Get the MIME type of the file. The '-b' option omits the filename from the output.
+    local mime_type
+    mime_type=$(file -b --mime-type "$1")
+    
+    # Check if the MIME type corresponds to gzip.
+    # application/gzip is standard, while application/x-gzip is also commonly seen.
+    if [[ "$mime_type" == "application/gzip" || "$mime_type" == "application/x-gzip" ]]; then
+        return 0 # 0 indicates success (true in bash)
+    else
+        return 1 # 1 indicates failure (false in bash)
+    fi
 }
-trap clean_up EXIT
 
-par_input="$(echo "$par_input" | tr ';' ' ')"
+# Read the ;-separated file paths from the input variable into an array
+IFS=";" read -ra input_files <<< "$par_input"
 
-echo -n ">> Check if input is gzipped... "
-set +eo pipefail
-file $par_input | grep -q 'gzip'
-is_zipped="$?"
-set -euo pipefail
-[[ "$is_zipped" == "0" ]] && echo "yes" || echo "no"
+# Process the files if the array contains any paths
+if [ ${#input_files[@]} -gt 0 ] && [ -n "${input_files[0]}" ]; then
 
-if [[ "$is_zipped" == "0" ]]; then
-  echo ">> zcat gzipped files"
-  zcat $par_input > $TMPDIR/contents
+    # Ensure the output file is empty before we start
+    > "$par_output"
+
+    echo "Processing files for -> $par_output"
+
+    # Create a subshell for the loop to group all cat/zcat output.
+    (
+        for file in "${input_files[@]}"; do
+            if [ -z "$file" ]; then continue; fi # Skip empty entries in the array
+
+            if is_gzipped "$file"; then
+                zcat "$file"
+            else
+                cat "$file"
+            fi
+        done
+    ) | if [ "$par_compress_output" = "true" ]; then
+        # If compression is enabled, pipe the entire stream to gzip
+        gzip -c >> "$par_output"
+    else
+        # Otherwise, just redirect the stream to the plain text file
+        cat >> "$par_output"
+    fi
+
+    echo "Finished creating $par_output."
 else
-  echo ">> cat plain files"
-  cat $par_input > $TMPDIR/contents
+    echo "No input files provided in \$par_input. Exiting."
 fi
 
-if [ "$par_gzip_output" == true ]; then
-  echo ">> Zip output file"
-  gzip $TMPDIR/contents
-  mv $TMPDIR/contents.gz $par_output
-else
-  mv $TMPDIR/contents $par_output
-fi
+echo "Script finished successfully."
