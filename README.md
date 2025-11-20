@@ -41,7 +41,7 @@ practices**. Key features generally include:
 
 Viash components in craftbox can be run in various ways:
 
-``` mermaid
+``` mermaid lang="mermaid
 flowchart TD
     A[craftbox v0.3.1] --> B(Viash Hub Launch)
     A --> C(Viash CLI)
