@@ -1,39 +1,53 @@
-name: move_files_to_directory
-summary: Publish one or multiple files to the same directory
-description: This component copies one or multiple files to the same destination directory, creating the output directory if it doesn't exist.
-authors:
-  - __merge__: /src/_authors/dorien_roosen.yaml
-    roles: [ maintainer ]
-arguments:
-  - name: "--input"
-    type: file
-    direction: input
-    required: true
-    multiple: true
-    description: Paths of the files that will be copied into the output directory.
-  - name: "--output"
-    type: file
-    direction: output
-    required: true
-    description: Path to output directory
-  - name: "--keep_symbolic_links"
-    alternatives: [-d]
-    type: boolean_true
-    description: Preserve symbolic links.
+name: move_paths_to_directory
+namespace: components/combine
+label: Move paths to directory
+summary: Copy one or multiple files or directories to the same output directory.
+description: |
+  This component copies one or multiple files or directories
+  to the same destination directory, creating the output directory if it doesn't
+  exist.
+
+argument_groups:
+  - name: Inputs
+    arguments:
+      - name: "--input"
+        type: file
+        direction: input
+        required: true
+        multiple: true
+        description: Paths of the files or directories that will be copied into the output directory.
+  - name: Outputs
+    arguments:
+      - name: "--output"
+        type: file
+        direction: output
+        required: true
+        description: Path to output directory.
+  - name: Options
+    arguments:
+      - name: "--keep_symbolic_links"
+        type: boolean_true
+        description: When set, symbolic links are preserved as symbolic links in the output directory. By default, symbolic links are dereferenced and the target file is copied.
+
 resources:
   - type: bash_script
     path: script.sh
+
 test_resources:
   - type: bash_script
     path: test.sh
 
 engines:
-- type: docker
-  image: debian:latest
-  setup:
+  - type: docker
+    image: debian:latest
+    setup:
       - type: apt
-        packages: [procps]
+        packages:
+          - procps
+  - type: native
 
 runners:
-- type: executable
-- type: nextflow
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [singlecpu, lowmem, lowdisk]

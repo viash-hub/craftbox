@@ -3,30 +3,31 @@
 set -eo pipefail
 
 ## VIASH START
-par_input="input.txt;input_2.txt"
+par_input="input.txt;input_dir.zarr"
 par_output="output"
+par_keep_symbolic_links="false"
 ## VIASH END
-
 
 if [[ ! -d "$par_output" ]]; then
   mkdir -p "$par_output"
 fi
 
-extra_params=( )
-
-if [ "$par_keep_symbolic_links" == "true" ]; then
-  extra_params+=( "-d" )
+# Set copy flags based on options
+cp_flags=""
+if [[ "$par_keep_symbolic_links" == "true" ]]; then
+  cp_flags="-P"
 fi
 
-# Process multiple input files
-IFS=";" read -ra input_files <<< "$par_input"
-for file in "${input_files[@]}"; do
-  # Check if the file exists before copying
-  if [[ -f "$file" ]]; then
-
-    cp ${extra_params[@]} "$file" "$par_output/"
-    echo "Copied $file to $par_output/"
+# Process multiple input paths (files or directories)
+IFS=";" read -ra input_paths <<< "$par_input"
+for path in "${input_paths[@]}"; do
+  if [[ -L "$path" ]] || [[ -f "$path" ]]; then
+    cp $cp_flags "$path" "$par_output/"
+    echo "Copied file $path to $par_output/"
+  elif [[ -d "$path" ]]; then
+    cp -r $cp_flags "$path" "$par_output/"
+    echo "Copied directory $path to $par_output/"
   else
-    echo "Warning: Input file $file does not exist, skipping"
+    echo "Warning: Input path $path does not exist, skipping"
   fi
 done
