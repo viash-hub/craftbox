@@ -13,20 +13,18 @@ if [[ ! -d "$par_output" ]]; then
 fi
 
 # Set copy flags based on options
-cp_flags=""
 if [[ "$par_keep_symbolic_links" == "true" ]]; then
-  cp_flags="-P"
+  cp_flags="-dr"
+else
+  cp_flags="-r"
 fi
 
 # Process multiple input paths (files or directories)
 IFS=";" read -ra input_paths <<< "$par_input"
 for path in "${input_paths[@]}"; do
-  if [[ -L "$path" ]] || [[ -f "$path" ]]; then
+  if [[ -e "$path" ]] || [[ -L "$path" ]]; then
     cp $cp_flags "$path" "$par_output/"
-    echo "Copied file $path to $par_output/"
-  elif [[ -d "$path" ]]; then
-    cp -r $cp_flags "$path" "$par_output/"
-    echo "Copied directory $path to $par_output/"
+    echo "Copied $path to $par_output/"
   else
     echo "Warning: Input path $path does not exist, skipping"
   fi
