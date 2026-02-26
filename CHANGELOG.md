@@ -1,3 +1,9 @@
+# craftbox x.x.x
+
+## NEW FEATURES
+
+* `move_files_to_directory`: add support for moving directories (PR #17).
+
 # craftbox 0.3.1
 
 ## MINOR CHANGES
