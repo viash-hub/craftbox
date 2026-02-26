@@ -1,7 +1,5 @@
-name: move_paths_to_directory
-namespace: components/combine
-label: Move paths to directory
-summary: Copy one or multiple files or directories to the same output directory.
+name: move_files_to_directory
+summary: Publish one or multiple files or directories to the same output directory.
 description: |
   This component copies one or multiple files or directories
   to the same destination directory, creating the output directory if it doesn't
