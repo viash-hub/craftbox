@@ -14,9 +14,17 @@ fi
 
 # Set copy flags based on options
 if [[ "$par_keep_symbolic_links" == "true" ]]; then
-  cp_flags="-dr"
+  # -a implies -dR --preserve=all
+  # with -d: same as --no-dereference (and --preserve=links)
+  # and --no-dereference: never follow symbolic links in SOURCE
+  # and -R, -r, --recursive: copy directories recursively
+  # --keep-directory-symlink: if the destination already exists and is a
+  #   symbolic link to a directory, follow the symlink and copy into the directory
+  #   it points to, instead of removing the symlink and creating a real directory in its place.
+  cp_flags="-a --keep-directory-symlink"
 else
-  cp_flags="-r"
+  # -L: always follow symbolic links in SOURCE
+  cp_flags="-Lr --preserve=all --no-preserve=link --keep-directory-symlink"
 fi
 
 # Process multiple input paths (files or directories)
