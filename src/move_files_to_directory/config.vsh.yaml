@@ -4,6 +4,9 @@ description: |
   This component copies one or multiple files or directories
   to the same destination directory, creating the output directory if it doesn't
   exist.
+authors:
+  - __merge__: /src/_authors/dorien_roosen.yaml
+    roles: [ maintainer ]
 
 argument_groups:
   - name: Inputs
