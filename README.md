@@ -43,7 +43,7 @@ Viash components in craftbox can be run in various ways:
 
 ``` mermaid lang="mermaid
 flowchart TD
-    A[craftbox v0.3.1] --> B(Viash Hub Launch)
+    A[craftbox v0.3.2] --> B(Viash Hub Launch)
     A --> C(Viash CLI)
     A --> D(Nextflow CLI)
     A --> E(Seqera Cloud)
@@ -53,7 +53,7 @@ flowchart TD
 ### 1. Via the Viash Hub Launch interface
 
 You can run this component directly from the Viash Hub [Launch
-interface](https://www.viash-hub.com/launch?package=craftbox&version=v0.3.1&component=concat_rtext&runner=Executable).
+interface](https://www.viash-hub.com/launch?package=craftbox&version=v0.3.2&component=concat_rtext&runner=Executable).
 
 ![](docs/viash-hub.png)
 
@@ -63,9 +63,9 @@ You can run this component directly from the command line using the
 Viash CLI.
 
 ``` bash
-viash run vsh://craftbox@v0.3.1/concat_rtext -- --help
+viash run vsh://craftbox@v0.3.2/concat_rtext -- --help
 
-viash run vsh://craftbox@v0.3.1/concat_rtext -- \
+viash run vsh://craftbox@v0.3.2/concat_rtext -- \
   --input path/to/input.txt \
   --input path/to/compressed.txt.gz \
   --output path/to/output.txt
@@ -80,7 +80,7 @@ You can run this component as a Nextflow pipeline.
 
 ``` bash
 nextflow run https://packages.viash-hub.com/vsh/craftbox \
-  -revision v0.3.1 \
+  -revision v0.3.2 \
   -main-script target/nextflow/concat_rtext/main.nf \
   -latest -resume \
   -profile docker \
@@ -109,7 +109,7 @@ component as a dependency:
 ``` yaml
 dependencies:
   - name: concat_rtext
-    repository: vsh://craftbox@v0.3.1
+    repository: vsh://craftbox@v0.3.2
 ```
 
 **Tip:** See the [Viash

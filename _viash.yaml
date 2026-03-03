@@ -1,5 +1,5 @@
 name: craftbox
-version: v0.3.1
+version: v0.3.2
 summary: |
   A collection of custom-tailored scripts and applied utilities built with Viash.
 description: |
@@ -20,7 +20,7 @@ links:
   issue_tracker: https://github.com/viash-hub/craftbox/issues
   repository: https://github.com/viash-hub/craftbox
 
-viash_version: 0.9.4
+viash_version: 0.9.7
 
 config_mods: |
   .requirements.commands := ['ps']
