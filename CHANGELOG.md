@@ -1,4 +1,4 @@
-# craftbox x.x.x
+# craftbox 0.3.2
 
 ## NEW FEATURES
 
@@ -8,7 +8,7 @@
 
 * Bump viash to 0.9.7 (PR #18).
 
-# craftbox 0.3.1
+# craftbox 0.3.2
 
 ## MINOR CHANGES
 
