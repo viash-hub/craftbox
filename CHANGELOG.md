@@ -4,6 +4,10 @@
 
 * `move_files_to_directory`: add support for moving directories (PR #17).
 
+## MINOR CHANGES
+
+* Bump viash to 0.9.7 (PR #18).
+
 # craftbox 0.3.1
 
 ## MINOR CHANGES
