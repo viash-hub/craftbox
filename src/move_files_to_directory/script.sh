@@ -32,14 +32,15 @@ fi
 # Process multiple input paths (files or directories)
 IFS=";" read -ra input_paths <<< "$par_input"
 
-# Check that `file_id` is provided when `output_summary` 
-if [[ -n "$par_output_summary" ]] && [[ -z "$par_file_id" ]]; then
-  echo "Error: --output_summary requires --file_id to be provided for file mapping"
-  exit 1
-fi
-
-# Parse file IDs and initialize CSV if both output_summary and file_id are provided
-if [[ -n "$par_output_summary" ]] && [[ -n "$par_file_id" ]]; then
+# Handle output summary CSV generation
+if [[ -n "$par_output_summary" ]]; then
+  # Require file_id when output_summary is requested
+  if [[ -z "$par_file_id" ]]; then
+    echo "Error: --output_summary requires --file_id to be provided for file mapping"
+    exit 1
+  fi
+  
+  # Parse and validate file IDs
   IFS=";" read -ra file_ids <<< "$par_file_id"
   
   # Validate that number of file IDs matches number of inputs
@@ -48,7 +49,7 @@ if [[ -n "$par_output_summary" ]] && [[ -n "$par_file_id" ]]; then
     exit 1
   fi
   
-  # Initialize CSV file
+  # Initialize CSV file with header
   echo "id,output_file_path" > "$par_output_summary"
 fi
 
@@ -62,8 +63,8 @@ for i in "${!input_paths[@]}"; do
     cp $cp_flags "$path" "$par_output/"
     echo "Copied $path to $destination"
     
-    # Add to CSV if both output_summary and file_id are provided
-    if [[ -n "$par_output_summary" ]] && [[ -n "$par_file_id" ]]; then
+    # Add to CSV if output summary is enabled
+    if [[ -n "$par_output_summary" ]]; then
       file_id="${file_ids[$i]}"
       echo "$file_id,$destination" >> "$par_output_summary"
     fi
@@ -73,6 +74,6 @@ for i in "${!input_paths[@]}"; do
 done
 
 # Print CSV location if generated
-if [[ -n "$par_output_summary" ]] && [[ -n "$par_file_id" ]]; then
+if [[ -n "$par_output_summary" ]]; then
   echo "File mapping CSV generated at: $par_output_summary"
 fi
