@@ -21,20 +21,12 @@ $meta_executable \
 
 
 # Test moving files and creating summary CSV
-TMPDIR=$(mktemp -d "$meta_temp_dir/$meta_name-XXXXXX")
-function clean_up {
- [[ -d "$TMPDIR" ]] && rm -rf "$TMPDIR"
-}
-trap clean_up EXIT
-
-touch "$TMPDIR/test_file.txt"
-touch "$TMPDIR/another_file.txt"
-
 $meta_executable \
   --input "$TMPDIR/test_file.txt" \
   --input "$TMPDIR/another_file.txt" \
   --output "$TMPDIR/test_output" \
-  --file_id "file001;file002" \
+  --file_id "file001" \
+  --file_id "file002" \
   --output_summary "$TMPDIR/summary.csv"
 
 [[ ! -d "$TMPDIR/test_output" ]] && echo "It seems no output directory is generated" && exit 1

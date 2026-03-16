@@ -32,6 +32,12 @@ fi
 # Process multiple input paths (files or directories)
 IFS=";" read -ra input_paths <<< "$par_input"
 
+# Check that `file_id` is provided when `output_summary` 
+if [[ -n "$par_output_summary" ]] && [[ -z "$par_file_id" ]]; then
+  echo "Error: --output_summary requires --file_id to be provided for file mapping"
+  exit 1
+fi
+
 # Parse file IDs and initialize CSV if both output_summary and file_id are provided
 if [[ -n "$par_output_summary" ]] && [[ -n "$par_file_id" ]]; then
   IFS=";" read -ra file_ids <<< "$par_file_id"
