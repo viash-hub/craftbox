@@ -1,3 +1,7 @@
+# craftbox 0.3.3
+
+* `move_files_to_directory`: optionally create an output csv file containing metadata of the files (ID, destination path) (PR #20).
+
 # craftbox 0.3.2
 
 ## NEW FEATURES

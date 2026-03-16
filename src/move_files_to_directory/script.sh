@@ -6,6 +6,8 @@ set -eo pipefail
 par_input="input.txt;input_dir.zarr"
 par_output="output"
 par_keep_symbolic_links="false"
+par_file_id=""
+par_output_summary=""
 ## VIASH END
 
 if [[ ! -d "$par_output" ]]; then
@@ -29,11 +31,49 @@ fi
 
 # Process multiple input paths (files or directories)
 IFS=";" read -ra input_paths <<< "$par_input"
-for path in "${input_paths[@]}"; do
+
+# Handle output summary CSV generation
+if [[ -n "$par_output_summary" ]]; then
+  # Require file_id when output_summary is requested
+  if [[ -z "$par_file_id" ]]; then
+    echo "Error: --output_summary requires --file_id to be provided for file mapping"
+    exit 1
+  fi
+  
+  # Parse and validate file IDs
+  IFS=";" read -ra file_ids <<< "$par_file_id"
+  
+  # Validate that number of file IDs matches number of inputs
+  if [[ ${#file_ids[@]} -ne ${#input_paths[@]} ]]; then
+    echo "Error: Number of file IDs (${#file_ids[@]}) must match number of input paths (${#input_paths[@]})"
+    exit 1
+  fi
+  
+  # Initialize CSV file with header
+  echo "id,output_file_path" > "$par_output_summary"
+fi
+
+for i in "${!input_paths[@]}"; do
+  path="${input_paths[$i]}"
   if [[ -e "$path" ]] || [[ -L "$path" ]]; then
+    # Get the basename of the input path for the destination
+    basename_path=$(basename "$path")
+    destination="$par_output/$basename_path"
+    
     cp $cp_flags "$path" "$par_output/"
-    echo "Copied $path to $par_output/"
+    echo "Copied $path to $destination"
+    
+    # Add to CSV if output summary is enabled
+    if [[ -n "$par_output_summary" ]]; then
+      file_id="${file_ids[$i]}"
+      echo "$file_id,$destination" >> "$par_output_summary"
+    fi
   else
     echo "Warning: Input path $path does not exist, skipping"
   fi
 done
+
+# Print CSV location if generated
+if [[ -n "$par_output_summary" ]]; then
+  echo "File mapping CSV generated at: $par_output_summary"
+fi

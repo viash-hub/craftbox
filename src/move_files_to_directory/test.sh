@@ -19,6 +19,29 @@ $meta_executable \
 [[ ! -d "$TMPDIR/test_output" ]] && echo "It seems no output directory is generated" && exit 1
 [[ ! -f "$TMPDIR/test_output/test_file.txt" ]] && [[ ! -f test_output/another_file.txt ]] && echo "Output files were not copied to the output directory" && exit 1
 
+
+# Test moving files and creating summary CSV
+$meta_executable \
+  --input "$TMPDIR/test_file.txt" \
+  --input "$TMPDIR/another_file.txt" \
+  --output "$TMPDIR/test_output" \
+  --file_id "file001" \
+  --file_id "file002" \
+  --output_summary "$TMPDIR/summary.csv"
+
+[[ ! -d "$TMPDIR/test_output" ]] && echo "It seems no output directory is generated" && exit 1
+[[ ! -f "$TMPDIR/test_output/test_file.txt" ]] && [[ ! -f "$TMPDIR/test_output/another_file.txt" ]] && echo "Output files were not copied to the output directory" && exit 1
+
+# Test that CSV summary is created
+[[ ! -f "$TMPDIR/summary.csv" ]] && echo "Summary CSV was not created" && exit 1
+
+# Test CSV headers
+head -1 "$TMPDIR/summary.csv" | grep -q "id,output_file_path" || { echo "CSV headers are incorrect"; exit 1; }
+
+# Test CSV content
+grep -q "file001,$TMPDIR/test_output/test_file.txt" "$TMPDIR/summary.csv" || { echo "CSV missing correct entry for test_file.txt"; exit 1; }
+grep -q "file002,$TMPDIR/test_output/another_file.txt" "$TMPDIR/summary.csv" || { echo "CSV missing correct entry for another_file.txt"; exit 1; }
+
 # Test copying a directory
 mkdir -p "$TMPDIR/test_dir"
 touch "$TMPDIR/test_dir/file_in_dir.txt"

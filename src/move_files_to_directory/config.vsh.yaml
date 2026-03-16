@@ -17,6 +17,12 @@ argument_groups:
         required: true
         multiple: true
         description: Paths of the files or directories that will be copied into the output directory.
+      - name: "--file_id"
+        type: string
+        multiple: true
+        description: |
+          Optional file IDs corresponding to each input file. 
+          If provided, must match the number of input files. 
   - name: Outputs
     arguments:
       - name: "--output"
@@ -24,6 +30,12 @@ argument_groups:
         direction: output
         required: true
         description: Path to output directory.
+      - name: "--output_summary"
+        type: file
+        required: false
+        direction: output
+        example: summary.csv
+        description: If provided, a csv containing the base filename and file ID per output file.
   - name: Options
     arguments:
       - name: "--keep_symbolic_links"
