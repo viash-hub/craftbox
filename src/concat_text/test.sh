@@ -75,7 +75,6 @@ gzip -k $INPUT_FILE_1
 gzip -k $INPUT_FILE_2
 gzip -k $INPUT_FILE_3
 
-
 echo ">> Creating expected output file expected_output.txt and zipped version"
 cat > "expected_output.txt" <<EOF
 one
