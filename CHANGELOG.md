@@ -1,3 +1,9 @@
+# craftbox 0.3.3
+
+## BUG FIXES
+
+* `concat_text`: Correctly detect gzipped input files that are symbolic links (PR #20).
+
 # craftbox 0.3.2
 
 ## NEW FEATURES

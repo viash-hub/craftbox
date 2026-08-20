@@ -11,7 +11,7 @@ is_gzipped() {
     fi
     # Get the MIME type of the file
     local mime_type
-    mime_type=$(file -b --mime-type "$1")
+    mime_type=$(file -bL --mime-type "$1")
     
     # Check if the MIME type corresponds to gzip.
     if [[ "$mime_type" == "application/gzip" || "$mime_type" == "application/x-gzip" ]]; then
@@ -110,5 +110,16 @@ $meta_executable \
   --output "output4.txt.gz" \
   --gzip_output
 compare_files "output4.txt.gz" "expected_output.txt.gz"
+
+echo ">> Run component on symlinked gzipped input file, plain output"
+
+echo "    Creating symbolic link 'symlink_to_file1' pointing to $INPUT_FILE_1.gz"
+SYMLINK_GZ="symlink_to_file1"
+ln -s "$INPUT_FILE_1.gz" "$SYMLINK_GZ"
+
+$meta_executable \
+  --input "$SYMLINK_GZ;$INPUT_FILE_2;$INPUT_FILE_3" \
+  --output "output5.txt"
+compare_files "output5.txt" "expected_output.txt"
 
 echo ">> Tests done"

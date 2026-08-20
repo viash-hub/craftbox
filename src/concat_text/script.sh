@@ -16,7 +16,7 @@ is_gzipped() {
     fi
     # Get the MIME type of the file. The '-b' option omits the filename from the output.
     local mime_type
-    mime_type=$(file -b --mime-type "$1")
+    mime_type=$(file -bL --mime-type "$1")
     
     # Check if the MIME type corresponds to gzip.
     # application/gzip is standard, while application/x-gzip is also commonly seen.
