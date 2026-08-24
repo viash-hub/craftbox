@@ -21,6 +21,26 @@ is_gzipped() {
     fi
 }
 
+assert_gzipped() {
+  local file="$1"
+  if is_gzipped "$file"; then
+    echo "OK: $file is gzip-compressed."
+  else
+    echo "FAILED: $file was expected to be gzip-compressed but is not."
+    return 1
+  fi
+}
+
+assert_not_gzipped() {
+  local file="$1"
+  if is_gzipped "$file"; then
+    echo "FAILED: $file was expected to be plain text but is gzip-compressed."
+    return 1
+  else
+    echo "OK: $file is plain text, as expected."
+  fi
+}
+
 compare_files() {
   local file1="$1"
   local file2="$2"
@@ -89,12 +109,14 @@ echo ">> Run component on 3 plain input files, plain output"
 $meta_executable \
   --input "$INPUT_FILE_1;$INPUT_FILE_2;$INPUT_FILE_3" \
   --output "output1.txt"
+assert_not_gzipped "output1.txt"
 compare_files "output1.txt" "expected_output.txt"
 
 echo ">> Run component on mixed input files, plain output"
 $meta_executable \
   --input "$INPUT_FILE_1.gz;$INPUT_FILE_2;$INPUT_FILE_3.gz" \
   --output "output2.txt"
+assert_not_gzipped "output2.txt"
 compare_files "output2.txt" "expected_output.txt"
 
 echo ">> Run component on 3 plain input files, zipped output"
@@ -102,6 +124,7 @@ $meta_executable \
   --input "$INPUT_FILE_1;$INPUT_FILE_2;$INPUT_FILE_3" \
   --output "output3.txt.gz" \
   --gzip_output
+assert_gzipped "output3.txt.gz"
 compare_files "output3.txt.gz" "expected_output.txt.gz"
 
 echo ">> Run component on mixed input files, zipped output"
@@ -109,6 +132,7 @@ $meta_executable \
   --input "$INPUT_FILE_1.gz;$INPUT_FILE_2;$INPUT_FILE_3.gz" \
   --output "output4.txt.gz" \
   --gzip_output
+assert_gzipped "output4.txt.gz"
 compare_files "output4.txt.gz" "expected_output.txt.gz"
 
 echo ">> Run component on symlinked gzipped input file, plain output"
@@ -120,6 +144,7 @@ ln -s "$INPUT_FILE_1.gz" "$SYMLINK_GZ"
 $meta_executable \
   --input "$SYMLINK_GZ;$INPUT_FILE_2;$INPUT_FILE_3" \
   --output "output5.txt"
+assert_not_gzipped "output5.txt"
 compare_files "output5.txt" "expected_output.txt"
 
 echo ">> Tests done"

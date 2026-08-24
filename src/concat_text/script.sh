@@ -5,7 +5,7 @@ set -eo pipefail
 ## VIASH START
 par_input="README.md;README.qmd"
 par_output="concatenated_output.txt"
-par_compress_output="true"
+par_gzip_output="true"
 ## VIASH END
 
 # --- Function to check for GZIP format using the 'file' command ---
@@ -49,7 +49,7 @@ if [ ${#input_files[@]} -gt 0 ] && [ -n "${input_files[0]}" ]; then
                 cat "$file"
             fi
         done
-    ) | if [ "$par_compress_output" = "true" ]; then
+    ) | if [ "$par_gzip_output" = "true" ]; then
         # If compression is enabled, pipe the entire stream to gzip
         gzip -c >> "$par_output"
     else

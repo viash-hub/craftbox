@@ -1,3 +1,9 @@
+# craftbox 0.3.4
+
+## BUG FIXES
+
+* `concat_text`: Fix `--gzip_output` being a no-op due to a variable name mismatch between the argument and the script (PR #23).
+
 # craftbox 0.3.3
 
 ## BUG FIXES
